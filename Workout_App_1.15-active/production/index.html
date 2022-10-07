@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/apple_watch_responsive.css">
+    <link rel="stylesheet" href="./styles/media_queries.css">
+    <script src="./js/main.js" defer></script>
+    <title>Workout App</title>
+</head>
+<body>
+    <div id="container">
+        <div id="top-navbar">
+            <img class="top_nav_img" src="./assets/svg/Workout_App_Logo.svg" />                    
+            <img class="top_nav_img" src="./assets/svg/Settings.svg" />
+        </div>
+
+        <div id="side-navbar">
+            <div id="node_list_holder">
+                <img onclick="show_nodes()" class="left_nav_img" src="./assets/svg/Options_Icon.svg" />
+                <img onclick="spawn_checklist()" class="left_nav_img node_place_button" src="./assets/svg/Checklist_Node.svg" />
+            </div>
+        </div>
+        
+        <!-- <div id="state_management">
+            <h1 class="console_items" id="1_console_item">Lorem</h1>
+            <h1 class="console_items" id="2_console_item">Ipsum</h1>
+            <h1 class="console_items" id="3_console_item">Dolar</h1>
+            <h1 class="console_items" id="4_console_item">Harvos</h1>
+        </div> -->
+
+        <div id="checklists"></div>
+    </div>
+</body>
+
+</html>
