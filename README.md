@@ -11,3 +11,5 @@ To use the color scheme
 -save somwhere you'll be able to have it
 -open Index.HTML
 -drag and drop the Default_theme.acs over the website from file explorer
+
+do not steal the app and claim it as your own
