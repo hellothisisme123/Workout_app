@@ -1,0 +1,15 @@
+
+//example:(#123456) (1.00_opacity);
+//example:(#abc) (0.00_opacity);
+//example:[rgba(1,2,3,0.5)];
+
+
+nav_bar_background:(#646464) (1.00_opacity);
+nav_bar_border_color:[rgba(0,0,0,0.5)];
+node_border_color:(#323232) (1.00_opacity);
+node_background_color:[rgba(100,100,100,0.75)];
+node_background_highlight_color:(#646464) (1.00_opacity);
+node_border_highlight_color:(#111) (1.00_opacity);
+node_text_color:(#fff) (1.00_opacity);
+file_transfer_color:[rgba(50,50,50,0.50)];
+text_font:{Calibri};

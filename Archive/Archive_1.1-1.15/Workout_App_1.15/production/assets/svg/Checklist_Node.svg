@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.6 111.6">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+
+      .cls-2 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Checklist">
+      <circle class="cls-1" cx="55.8" cy="55.8" r="53.8"/>
+      <rect class="cls-1" x="25.34" y="23.23" width="14.84" height="14.84" rx="3.51"/>
+      <rect class="cls-1" x="25.34" y="73.54" width="14.84" height="14.84" rx="3.51"/>
+      <rect class="cls-1" x="25.34" y="48.38" width="14.84" height="14.84" rx="3.51"/>
+      <rect class="cls-2" x="49.35" y="29.16" width="37.52" height="2.97" rx="1.48"/>
+      <rect class="cls-2" x="49.35" y="54.32" width="37.52" height="2.97" rx="1.48"/>
+      <rect class="cls-2" x="49.35" y="79.47" width="37.52" height="2.97" rx="1.48"/>
+    </g>
+  </g>
+</svg>
