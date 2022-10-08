@@ -1,0 +1,9 @@
+
+
+
+nav_bar_background:              (#646464)                   (1_opacity);
+nav_bar_border_color:            [rgba(0, 0, 0, 0.5)];
+node_border_color:               (#323232)                   (1_opacity);
+node_background_color:           [rgba(100,100,100, 0.75)];                  
+node_background_highlight_color: (#323232)                   (1_opacity)
+node_border_highlight_color:     (#111)                      (1_opacity);

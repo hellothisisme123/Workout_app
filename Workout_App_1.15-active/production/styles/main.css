@@ -1,9 +1,13 @@
 :root {
-    --Solid_Light_Gray: #646464;
-    --Light_Gray_Transparent: rgba(100,100,100, 0.75);
-    --Border_50p_Opacity: rgba(0, 0, 0, 0.5);
-    --Border_But_Solid: #323232;
-    --border_select_highlight: #111;
+    --nav_bar_background: #646464;
+    --node_background_color: rgba(100,100,100, 0.75);
+    --nav_bar_border_color: rgba(0, 0, 0, 0.5);
+    --node_border_color: #323232;
+    --node_border_highlight_color: #111;
+    --node_background_highlight_color: #646464;
+    --node_text_color: #fff;
+    --text_font: Calibri;
+    --file_transfer_color: rgba(50,50,50,0.5);
 
     /* Default task colors */
     --Default_red: #FC9996;
@@ -16,6 +20,25 @@
 
 html {
     overflow: scroll;
+}
+
+#file_transfer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    content: ' ';
+    z-index: 150;
+    transition: all 0.15s linear;
+}
+
+#file_transfer.off {
+    z-index: -10;
+    background-color: transparent;
+}
+
+#file_transfer.on {
+    z-index: 150;
+    background-color: var(--file_transfer_color);
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -43,8 +66,8 @@ html {
   }
 
 .checklist {
-    background-color: var(--Light_Gray_Transparent);
-    border: 0.5vh solid var(--Border_50p_Opacity);
+    background-color: var(--node_background_color);
+    border: 0.5vh solid var(--nav_bar_border_color);
     border-radius: 0.3em;
     position: absolute;
     top: 0;
@@ -65,15 +88,15 @@ html {
 
 .checklist_title {
     text-align: center;
-    font-family: Calibri;
+    font-family: var(--text_font);
     line-height: 90%;
-    color: white;
+    color: var(--node_text_color);
     text-shadow: #000000 0 0 1em;
     font-size: 2.25em;
 }
 
 .checklist_bulleted_list {
-    color: white;
+    color: var(--node_text_color);
     text-shadow: #000000 0 0 1em;
     margin-left: 1em;
     /* text-shadow: 0px 0px 0.em rgba(0,0,0,0.8); */
@@ -83,7 +106,7 @@ html {
 }
 
 .checklist_bullet_point {
-    font-family: Calibri;
+    font-family: var(--text_font);
     font-size: 125%;
     overflow: hidden;
 }
@@ -114,13 +137,13 @@ html {
 
 #side-navbar {
     z-index: 90;
-    background-color: var(--Solid_Light_Gray);
+    background-color: var(--nav_bar_background);
     position: fixed;
     top: 0;
     left: 0;
     width: 4%;
     height: 100%;
-    border: 0.3vh solid var(--Border_50p_Opacity);
+    border: 0.3vh solid var(--nav_bar_border_color);
     display: flex;
     align-items: center;
     text-align: center;
@@ -144,13 +167,13 @@ html {
 
 #top-navbar {
     z-index: 100;
-    background-color: var(--Solid_Light_Gray);
+    background-color: var(--nav_bar_background);
     position: fixed;
     top: 0;
     left: 0; 
     width: 100%;
     height: 8%;
-    border: 0.3vh solid var(--Border_50p_Opacity);
+    border: 0.3vh solid var(--nav_bar_border_color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,33 +193,6 @@ html {
     max-width: 15%;
 }
 
-/* 
-.horizontal_resize_cursor {
-    cursor: e-resize;
-}
-
-.vertical_resize_cursor {
-    cursor: n-resize;
-}
-
-.corner_resize_cursor_left_bottom {
-    cursor: nesw-resize;
-} 
-
-#state_management {
-    position: fixed;
-    bottom: 0;
-    display: none;
-}
-
-.console_items {
-    text-shadow: 0px 0px 2px #000000;
-    font-size: 1.5em;
-    font-family: Calibri;
-    color: #e9d9de;
-    line-height: 0.5em;
-}*/
-
 .checklist_item_styles {
     width: 100%;
     height: 8vh;
@@ -209,9 +205,9 @@ html {
 .checklist_checkbox_styles {
     aspect-ratio: 1 / 1;
     height: 6vh;
-    background-color: var(--Solid_Light_Gray);
+    background-color: var(--nav_bar_background);
     border-radius: 0.75vh;
-    border: 0.3vh solid var(--Border_But_Solid);
+    border: 0.3vh solid var(--node_border_color);
     z-index: 4;
     margin: 0 5%;
 }
@@ -222,11 +218,11 @@ html {
     resize: none;
     font-size: 1.5em;
     height: 50%;
-    background-color: var(--Solid_Light_Gray);
-    border-color: var(--Border_But_Solid);
-    outline-color: var(--Border_But_Solid);
+    background-color: var(--nav_bar_background);
+    border-color: var(--node_border_color);
+    outline-color: var(--node_border_color);
     border-radius: 0.5vh;
-    color: white;
+    color: var(--node_text_color);
     margin: 0 10% 0 0;
 }
 
@@ -235,8 +231,8 @@ html {
     aspect-ratio: 1 / 1;
     height: 6vh;
     border-radius: 0.75vh;
-    background-color: var(--Solid_Light_Gray);
-    border: 0.3vh solid var(--Border_But_Solid);
+    background-color: var(--nav_bar_background);
+    border: 0.3vh solid var(--node_border_color);
     margin: 0 5%;
     display: flex;
     justify-content: center;
@@ -249,8 +245,8 @@ html {
 }
 
 .selected_node {
-    background-color: var(--Solid_Light_Gray);
-    border-color: var(--border_select_highlight);
+    background-color: var(--node_background_highlight_color);
+    border-color: var(--node_border_highlight_color);
 }
 
 .the_shadow_realm {

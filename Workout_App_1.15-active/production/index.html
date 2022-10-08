@@ -8,16 +8,20 @@
     <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
     <link rel="stylesheet" href="./styles/apple_watch_responsive.css">
     <link rel="stylesheet" href="./styles/media_queries.css">
+    <link rel="file" id="acs_file_link" href="../color_themes/default_theme/Default_theme.acs">
     <script src="./js/main.js" defer></script>
     <title>Workout App</title>
 </head>
 <body>
     <div id="container">
+        <div id="file_transfer" class="off"></div>
         <div id="top-navbar">
             <img class="top_nav_img" src="./assets/svg/Workout_App_Logo.svg" />                    
+            
             <img class="top_nav_img" src="./assets/svg/Settings.svg" />
         </div>
-
+        <br><br><br><br><br><br>
+        <input type="file" name="color_theme" id="color_theme_input" >
         <div id="side-navbar">
             <div id="node_list_holder">
                 <img onclick="show_nodes()" class="left_nav_img" src="./assets/svg/Options_Icon.svg" />

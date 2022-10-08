@@ -12,6 +12,22 @@ let selected_items_array = [];
 //let history_location = 0;
 
 
+/*        ////////////WIP Collision for dynamic spawning system
+const collision_event = new CustomEvent('collision', {
+    detail: { //various things
+        col_a: col_item_a,
+        col_b: col_item_b
+    }
+});
+
+window.addEventListener('collision', (e) => {
+    console.log(e.detail);
+});*/ 
+
+
+
+
+
 class Checklist { //Checklist class
     constructor(/*id_selector,*/
                 resize_range,                               // 1
@@ -67,7 +83,7 @@ class Checklist { //Checklist class
         
     }
     
-    spawn(item_count, x, y, spawn_type) { //spawns a checklist
+    spawn(item_count, x, y, spawn_type, collision_mode) { //spawns a checklist
         let random_displace_x;
         let random_displace_y;
 
@@ -93,12 +109,18 @@ class Checklist { //Checklist class
 
         //positions the div in selected position
         if (spawn_type=='random') {
-            random_displace_x = Math.random() * (20 - 20) + 20;
-            random_displace_y = Math.random() * (20 - 20) + 20;
-            console.log(random_displace_x);
-            this.checklist_selector.style.top = `${y + random_displace_y}px`;
-            this.checklist_selector.style.left = `${x + random_displace_x}px`;
+            random_displace_x = Math.random() * 100;
+            random_displace_y = Math.random() * 100;
+            
+            //adds the random values to the spawn location
+            y += random_displace_y;
+            x += random_displace_x;
         }
+
+        //sets the position according to the function ran
+        this.checklist_selector.style.top = `${y}px`;
+        this.checklist_selector.style.left = `${x}px`;
+
         //positions the div in selected size
         this.checklist_selector.style.height = `${this.height}px`;
         this.checklist_selector.style.width = `${this.width}px`;
@@ -121,7 +143,6 @@ class Checklist { //Checklist class
             let li_selector;
             let dumbbell_image_selector;
 
-            console.log("left_tutorial_spawned line 61 to display class");
             //spawns title h1 in checklist
             this.checklist_selector.appendChild(document.createElement('h1'));
             h1_selector = this.checklist_selector.childNodes[this.checklist_selector.childNodes.length - 1];
@@ -189,19 +210,16 @@ class Checklist { //Checklist class
         
         // |--__--<><> middle tutorial <><>--__--| \\
         if (this.Default_node_type == "middle_tutorial") {
-            console.log("middle_tutorial_spawned line 61 to display class");
 
         }
         
         // |--__--<><> right tutorial <><>--__--| \\
         if (this.Default_node_type == "right_tutorial") {
-            console.log("right_tutorial_spawned line 61 to display class");
 
         }
 
         // |--__--<><> notepad <><>--__--| \\
         if (this.Default_node_type == "checklist") {
-            console.log("checklist line 61 to display class");
             let checklist_item_selector;
             let checklist_box_checker_selector;
             let checklist_input_text_selector;
@@ -241,9 +259,18 @@ class Checklist { //Checklist class
             checklist_add_checker_image_selector.classList.add('add_checker_image_styles');
             checklist_add_checker_image_selector.setAttribute('src', './assets/svg/Plus.svg');
         }
-        checklist.move();
-    }
 
+        // |--__--<><> collision <><>--__--| \\
+        if (collision_mode) {
+            this.collision_node(true);
+            this.checklist_selector.addEventListener('collision', (e) => {
+                console.log('evemt run');
+            });
+        }
+
+        this.move();   
+    }
+    
     add_checklist_item(amount) {
         for (let i = 0; i < amount; i++) {
             console.log(amount);
@@ -315,28 +342,63 @@ class Checklist { //Checklist class
             });
         });
     }
+
+    collision_node(on_off_switch) {
+        let colcheck_loop;
+        // console.log('asdasssssd');
+        
+        
+        
+        if (on_off_switch) {
+            colcheck_loop = setInterval(this.colcheck, 1000, this);
+        } else if (!on_off_switch) {
+            clearInterval(colcheck_loop);
+        }
+        //console.log(colcheck_loop);
+
+        
+        
+    }
+
+    colcheck(this_object, e) {
+        // console.log(this_object);
+        /*if (top_a < top_b,
+            bottom_a < bottom_b,
+            left_a < left_b,
+            right_a < right_b
+        ) {
+            
+        }*/
+
+
+        //console.log('colcheck');
+    }
+}    
                                                  //                  item_count
                                                  //                top
                                                  //           left 
-}                                                //      width
+                                                 //      width
                                                  //height   
-const checklist  =        new Checklist(20, 5, null, 600, 325, 250, 250, 5, null, "left_tutorial"); //spawns a checklist from the class as an object
-const checklist2 =        new Checklist(20, 5, null, 250, 350, 730, 600, 5, null, "middle_tutorial");
-const checklist3 =        new Checklist(20, 5, null, 125, 150, 755, 430, 5, null, "right_tutorial");
+const checklist         = new Checklist(20, 5, null, 600, 325, 250, 250, 5, null, "left_tutorial"); //spawns a checklist from the class as an object
+const checklist2        = new Checklist(20, 5, null, 250, 350, 730, 600, 5, null, "middle_tutorial");
+const checklist3        = new Checklist(20, 5, null, 125, 150, 755, 430, 5, null, "right_tutorial");
 const checklist_notepad = new Checklist(20, 5, null, 200, 200, 800, 300, 5, null, "checklist");
 
-checklist.spawn        (0, 250, 250); //spawns left_tutorial
-checklist2.spawn       (0, 730, 600); //spawns middle tutorial
-checklist3.spawn       (0, 755, 430); //spawns right tutorial
-spawn_checklist_notepad(2, 100, 100); //spawns a checklist with 2 items
+
+
+
+checklist.spawn        (0, 250, 250, 'random', true); //spawns left_tutorial
+checklist2.spawn       (0, 730, 600, 'random', true); //spawns middle tutorial
+checklist3.spawn       (0, 755, 430, 'random', true); //spawns right tutorial
+spawn_checklist_notepad(2, 100, 100, 'random', true); //spawns a checklist with 2 items
 
 
 
 
 
 
-function spawn_checklist_notepad(items, x, y) {
-    checklist_notepad.spawn(items, x, y) //spawns a checklist with 2 items
+function spawn_checklist_notepad(items, x, y, spawn_type, collision_mode) {
+    checklist_notepad.spawn(items, x, y, spawn_type, collision_mode) //spawns a checklist with 2 items
 }
 
 
@@ -422,6 +484,166 @@ window.addEventListener('keydown', (e) => {
     //console.log(e);
     //console.log(e.key);
 });
+
+window.addEventListener('drop', (e) => { //runs when the user drops in the .acs
+    e.preventDefault(); //prevents it from opening in a new tab
+    const input = document.getElementById('color_theme_input'); //color theme input selector
+    document.querySelector('#file_transfer').classList.remove('on');//removes the on class
+    document.querySelector('#file_transfer').classList.add('off'); //adds the off class
+    
+    input.files = e.dataTransfer.files; //updates the color scheme in the input
+    read_acs_file(); //reads the file and turns updates the color scheme
+});
+
+window.addEventListener('dragover', (e) => {
+    e.preventDefault(); //prevents it from opening in a new tab
+    const input = document.getElementById('color_theme_input'); //color theme input selector
+    document.querySelector('#file_transfer').classList.remove('off'); //remove off class
+    document.querySelector('#file_transfer').classList.add('on'); //add on class
+});
+
+window.addEventListener('dragleave', (e) => {
+    const input = document.getElementById('color_theme_input'); //color theme input sector
+    document.querySelector('#file_transfer').classList.remove('on'); //remove on class
+});
+
+
+const file_input = document.getElementById('color_theme_input'); //color theme input selector
+file_input.addEventListener('change', (e) => {
+    read_acs_file(); //runs on change
+});
+
+//__--__/-\ read the 'awesome color scheme' file type |-\__--__\\
+function read_acs_file(default_file_path) {
+    console.log('color scheme added');
+    const file_input = document.getElementById('color_theme_input'); //color theme input selector
+    
+    if (default_file_path !== undefined) {
+        console.log("defined");
+        file_input.setAttribute('value', default_file_path);
+    }
+
+    file_type = file_input.files[0].name.split('.'); //splits filetype into name and type
+    file_type = file_type[1];  //sets filetype to only the filetpye
+    let file; //creates file
+    if (file_type=='acs') {
+        file = file_input.files[0]; //gets the files from the input
+    }
+
+    let file_data_storage = []; //useful for switching back and forth and saving accurately
+
+    const reader = new FileReader(); //file reader
+    reader.addEventListener('load', (event) => {
+        file = event.target.result; //grabs the data from the file
+
+        file = file.split('\r'); //splits the file after each line
+        file.forEach(line => {
+            line = line.split(':'); //splits line between :
+            file_data_storage.push(line); //adds line to new file variable for storage
+            file = file_data_storage; //sets the main file to the new value
+        });
+
+        file_data_storage = [];
+        file.forEach(line => { //removes the empty lines in the beginning
+            if (line[0]!='' && line[0]!='\n') {  
+                file_data_storage.push(line); //pushes to file storage when it has stuff
+            }
+        });
+        file = file_data_storage; //saves to file
+
+        file_data_storage = [];
+        file.forEach(line => {
+            line[0] = line[0].slice(1); //removes the \n from the beginning of each line
+            file_data_storage.push(line); //pushes the line to file data storage
+            file = file_data_storage; //saves to file
+        }); 
+        
+        file_data_storage = [];
+        file.forEach(line => {
+            if (line[1].charAt(0) == '[') {
+                line[1] = line[1].slice(1); //removes the [ from the beginning of each line
+                line[1] = line[1].slice(0, -2); //removes the ]; from the end of each line
+
+                file_data_storage.push([line[0], line[1] ]); //pushes the lines with rgba
+            } else if (line[1].charAt(0) == '(') {
+                line[1] = line[1].slice(0, -1); //removes the ; from the end of each line
+                line[1] = line[1].split(' '); 
+                
+                line[1][0] = line[1][0].slice(1); //removes the ( from the hex code
+                line[1][0] = line[1][0].slice(0, -1); //removes the ) from the hex code
+                line[1][1] = line[1][1].slice(1); //removes the ( from the opacity
+                line[1][1] = line[1][1].slice(0, -9); //removes the ) from the opacity
+
+                file_data_storage.push([ line[0], line[1][0], line[1][1] ]); //pushes the lines with hex
+            } else if (line[1].charAt(0) == '{') {
+                line[1] = line[1].slice(1); //removes the { from the beginning
+                line[1] = line[1].slice(0, -2); //removes the }; frome the end
+
+                file_data_storage.push([line[0], line[1]]); //pushes the lines with custom
+            }
+            file = file_data_storage; //saves to file
+        });
+
+        file.forEach(line => {
+            if (line.length == 3) { //hex
+                if (line[1].length == 4) {
+                    // seperate from the rest
+                    r = line[1].slice(1);
+                    r = r.slice(0, -2);
+                    g = line[1].slice(2);
+                    g = g.slice(0, -1);
+                    b = line[1].slice(3);
+
+                    o = line[2];
+
+                    // convert to number  
+                    r = r + r;
+                    r = parseInt(r, 16);
+                    g = g + g;
+                    g = parseInt(g, 16);
+                    b = b + b;
+                    b = parseInt(b, 16);
+
+
+                    line[1] = `rgba(${r},${g},${b},${o})`;
+                } else if (line[1].length == 7) {
+                    // seperate from the rest
+                    r = line[1].slice(1);
+                    r = r.slice(0, -4);
+                    g = line[1].slice(1);
+                    g = g.slice(2, -2);
+                    b = line[1].slice(1);
+                    b = b.slice(4);
+
+                    o = line[2];
+
+                    //convert to number
+                    r = parseInt(r, 16);
+                    g = parseInt(g, 16);
+                    b = parseInt(b, 16);
+
+                    line[1] = `rgba(${r},${g},${b},${o})`;
+                }
+                line.pop();
+            } else if (line.length == 2) { //rgba
+                line[1] = line[1];
+            }
+
+            
+            comment_check = line[0].slice(0, -1*(line[0].length) + 2); //detects for comments
+            if (comment_check=='//') { 
+                for (let i = 0; i < line.length + 1; i++) { //deletes everything inside
+                    line.shift();
+                }
+            }
+
+            let root = document.documentElement; //sets root selector
+            root.style.setProperty(`--${line[0]}`, `${line[1]}`) //sets each root property
+        });
+        // console.log(file);
+    });
+    reader.readAsText(file);
+}
 
 
 
