@@ -540,7 +540,7 @@ function read_acs_file(default_file_path) {
         file.forEach(line => {
             line = line.split(':'); //splits line between :
             file_data_storage.push(line); //adds line to new file variable for storage
-            file = file_data_storage; //sets the main file to the new value
+            file = file_data_storage; //sets the main file to the new value -do not claim this as your own if you didn't make it
         });
 
         file_data_storage = [];
