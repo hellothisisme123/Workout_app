@@ -159,7 +159,7 @@ class Checklist { //Checklist class
             h1_selector = this.checklist_selector.childNodes[this.checklist_selector.childNodes.length - 1];
             //console.log(`h1_selector:${h1_selector}`);
             h1_selector.classList.add("checklist_title");
-            h1_selector.innerHTML = "Lorem ipsumasdasds<br>dolor<br>sit consectetur";
+            h1_selector.innerHTML = "Lorem ipsum<br>dolor<br>sit consectetur";
 
             //spawns br
             this.checklist_selector.appendChild(document.createElement('br'));
