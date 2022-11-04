@@ -52,7 +52,12 @@ class Checklist { //Checklist class
                 combined_height_of_all_previous_divs_within_checklists,
                 resizing_no_movement,
                 grab_area_selector,
-                screen_Left
+                screen_Left,
+                table_selector,
+                selected_month,
+                selected_year,
+                calendar_data,
+                calendar_date
 
                 
                 //id_selector
@@ -81,8 +86,11 @@ class Checklist { //Checklist class
         this.resizing_no_movement = resizing_no_movement;
         this.grab_area_selector = grab_area_selector;
         this.screen_Left = screen_Left;
-        
-        
+        this.table_selector = table_selector;
+        this.selected_month = selected_month;
+        this.selected_year = selected_year;
+        this.calendar_data = calendar_data;
+        this.calendar_date = calendar_date;
     }
     
     spawn(item_count, x, y, spawn_type, collision_mode) { //spawns a checklist
@@ -141,10 +149,10 @@ class Checklist { //Checklist class
         //\/\/\/\_/--- default node types ---\_/\/\/\/\\
 
         //setting the grab area
-            this.checklist_selector.appendChild(document.createElement('div'));
-            this.grab_area_selector = this.checklist_selector.childNodes[this.checklist_selector.childNodes.length - 1];
-            this.grab_area_selector.classList.add("checklist_grab_area");
-            checklists_grab_area_all = document.querySelectorAll(".checklist_grab_area");
+        this.checklist_selector.appendChild(document.createElement('div'));
+        this.grab_area_selector = this.checklist_selector.childNodes[this.checklist_selector.childNodes.length - 1];
+        this.grab_area_selector.classList.add("checklist_grab_area");
+        checklists_grab_area_all = document.querySelectorAll(".checklist_grab_area");
 
 
         // |--__--<><> left tutorial <><>--__--| \\
@@ -271,6 +279,43 @@ class Checklist { //Checklist class
             checklist_add_checker_image_selector.setAttribute('src', './assets/svg/Plus.svg');
         }
 
+        // |--__--<><> calendar <><>--__--| \\
+        if (this.Default_node_type == "calendar") {
+            console.log('spawn calendar');
+            this.checklist_selector.innerHTML += '<div class="calendar_container"> <table class="calendar_table_node"> <tr class="calendar_day_title_row"> <th class="calendar_day_title_cell cell">Sunday</th> <th class="calendar_day_title_cell cell">Monday</th> <th class="calendar_day_title_cell cell">Tuesday</th> <th class="calendar_day_title_cell cell">Wednesday</th> <th class="calendar_day_title_cell cell">Thursday</th> <th class="calendar_day_title_cell cell">Friday</th> <th class="calendar_day_title_cell cell">Saturday</th> </tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr><tr> <td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td><td class="calendar_day_cell cell">0</td></tr></table> <button class="change_month_button" onclick="calendar.change_month(1)">next month</button> <button class="change_month_button" onclick="calendar.change_month(-1)">last month</button> <button class="change_month_button" onclick="calendar.change_month(12)">next year</button> <button class="change_month_button" onclick="calendar.change_month(-12)">last year</button> <div class="date_label">1995</div></div>';
+            
+            this.checklist_selector.childNodes[1].childNodes.forEach(child => {
+                if (child.localName == 'table') this.table_selector = child
+            });
+
+            console.log(this.table_selector)
+
+            this.calendar_date = new Date(); //date variable
+
+            this.selected_year = this.calendar_date.getFullYear() - 1995;  //sets the year
+            this.selected_month = this.calendar_date.getMonth();           //sets the month
+
+            this.calendar_data = this.get_calendar_data(2500 - 1994);     //sets data for the calendar to set to
+            this.fill_table(this.calendar_data, this.table_selector);          //fills the table
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            
+        
+        
+        
+        
+        
+        
+        }
+
         // |--__--<><> collision <><>--__--| \\
         if (collision_mode) {
             this.collision_node(true);
@@ -280,6 +325,139 @@ class Checklist { //Checklist class
         }
 
         this.move();   
+    }
+
+    get_month_from_num(num) { //if given the month value it returns the month
+        const months = [ //constant data on the months
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ]
+        return `${months[num]}`; //returns the month
+    }
+    
+    change_month(e) {
+        if (this.selected_year == 0 && isNegative(e) && isNegative(this.selected_month-1)) return;    //prevents from going bellow 0
+        if (e==-12 && this.selected_year == 0) {                                                 //prevents from going bellow 0
+            this.selected_month = 0;
+            this.fill_table(this.calendar_data, this.table_selector);
+            return;
+        }
+        if (this.selected_year == 2500 - 1995 && e==12 || this.selected_year == 2500 - 1995 && this.selected_month>10 && e==1) return; //prevents from going above 2500
+
+        if(e==1)  this.selected_month++; //increments up one month
+        if(e==-1) this.selected_month--; //increments down one month
+        if(e==12) this.selected_year++;  //increments up one year
+        if(e==-12)this.selected_year--;  //increments down one year
+
+        if (this.selected_month > 11) {  //overflow when it goes past december
+            this.selected_year++;        //increments up one year
+            this.selected_month = this.selected_month -12; //sets the month to according month
+        }
+
+        if (this.selected_month < 0) {   //overflow when it goes below january
+            this.selected_year--;        //increments down one year
+            this.selected_month = 12 + this.selected_month; //sets the month to the according month
+        }
+    
+    
+
+        console.log(`${this.selected_year}:${this.selected_month}`);
+        this.fill_table(this.calendar_data, this.table_selector);
+    }
+
+    fill_table(data, table) { //runs through each row and collumn, setting each cells innerHTML to the data desired
+        data = data[this.selected_year][this.selected_month];
+        // console.log(data);
+        let current_selected_cell;
+
+        // console.log(table.childNodes[1].childNodes)
+
+        let date = new Date();                  //date variable
+        let today = date.getDate();             //get the date number in the month
+        let month = date.getMonth();            //get the month
+        let year = date.getFullYear() - 1995;   //get the year (in code the real year is set later)
+    
+        let table_dimensions = { //dimensions of the table
+            "rows": table.rows.length - 1, //row count
+            "collumns": document.querySelectorAll('.calendar_table_node tr th').length //collumn count
+        };
+        if (table_dimensions.rows != data.length || table_dimensions.collumns != data[0].length) { //runs when the rows and collumns of table and data are inequal
+            console.log('could not set data, data and table row counts do not align');
+            return; //ends function early
+        }
+        for (let row_i = 0; row_i < data.length; row_i++) { //runs once for each row and skips the title row
+            // console.log(table.childNodes[1].childNodes[row_i+1].childNodes.length - 1);
+            for (let collumn_i = 0; collumn_i < table.childNodes[1].childNodes[row_i+1].childNodes.length - 1; collumn_i++) { //runs once for each collumn within the row
+                current_selected_cell = table.childNodes[1].childNodes[row_i+1].childNodes[collumn_i + 1]; //sets the selected cell for easy manipulation
+                // console.log(current_selected_cell);
+                current_selected_cell.innerHTML = data[row_i][collumn_i]; //sets the innerhtml to the data passed
+                if (current_selected_cell.innerHTML == today && this.selected_month == month && this.selected_year == year) { //when the selected cell is the current day
+                    current_selected_cell.style.backgroundColor = 'var(--calendar-secondary)' //highlights the cell
+                } else {
+                    current_selected_cell.style.backgroundColor = ''; //unhighlights the cell when its no longer the same
+                }
+            }
+        }
+    
+        document.querySelector('.date_label').innerHTML = `${this.selected_year + 1995}, ${this.get_month_from_num(this.selected_month)}`; //sets the date label
+    }
+
+    get_calendar_data(year_count) { //starting year 1995 cuz the first was on a monday
+        const month_day_count = [
+            31, 28, 31, 30,
+            31, 30, 31, 31,
+            30, 31, 30, 31
+        ];                                                                          //data on the amount of days in a month
+        let years = [];                                                             //every year generated
+        let leap_index = 2;                                                         //sets the leap index according to the first year (1995) hardcoded
+        let leap_day = 0;                                                           //initializes the leap day to 0
+        let stop_index = 0;                                                         //index on what place the code stopped counting up
+        
+        for (let i = 0; i < year_count; i++) { //once for each year
+            let current_year = [];                                                  //the year that the loop generates
+            leap_index++;                                                           //increments the leap index up one
+            
+            for (let month_i = 0; month_i < 12; month_i++) { //once for each month
+                if (isDivisible(leap_index, 4) && month_i==1) {
+                    leap_day = 1;   //leap day
+                } else { 
+                    leap_day = 0;   //no leap day
+                }
+                this.current_month = [];                                                 //the month that each loop generates
+                let running = true;                                                 //helps to fill in the 0's after it finishes
+                let day_date_i = 0 - stop_index;                                    //resets the date count and subtracts the stop_index so the dates are correct
+                for (let week_i = 0; week_i < 6; week_i++) {                        //once for each week in month 
+                    let current_week = [];                                          //current week this generates
+                    for (let day_i = 0; day_i < 7; day_i++) { //once for each day in week
+                        if (day_date_i < month_day_count[month_i] + leap_day && running) {     //increments the date filling in each day, and stops when it reaches the amount of days in that specific month according to the constant data
+                            day_date_i++;
+                        } else if (running) {                                       //runs when it stops counting the date up
+                            day_date_i = 0;                                         //resets the date counter
+                            running = false;                                        //stops it from counting up
+                            stop_index = day_i;                                     //sets the stop_index to the specific location that the code stopped
+                        }
+                        current_week.push(day_date_i);                              //pushes the day to the week
+                    }
+                    // console.log('week end')
+                    this.current_month.push(current_week);                               //pushes the week to the month
+                }
+                // console.log('month end');
+                current_year.push(this.current_month);                                   //pushes the month to the year
+            }
+            // console.log(current_year);
+            years.push(current_year);                                               //pushes the year to years array
+        }
+        return years;
     }
     
     add_checklist_item(amount) {
@@ -411,33 +589,28 @@ class Checklist { //Checklist class
 
         //console.log('colcheck');
     }
-}    
-                                                 //                  item_count
-                                                 //                top
-                                                 //           left 
-                                                 //      width
-                                                 //height   
-const checklist         = new Checklist(20, 5, null, 600, 325, 250, 250, 5, null, "left_tutorial"); //spawns a checklist from the class as an object
-const checklist2        = new Checklist(20, 5, null, 250, 350, 730, 600, 5, null, "middle_tutorial");
-const checklist3        = new Checklist(20, 5, null, 125, 150, 755, 430, 5, null, "right_tutorial");
-const checklist_notepad = new Checklist(20, 5, null, 200, 200, 800, 300, 5, null, "checklist");
+}                                               //                                default node type
+                                                //                     item_count
+                                                //                  top
+                                                //            left 
+                                                //       width
+                                                // height   
+const checklist         = new Checklist(20, 5, null, 600, 325, 250,  250, 5, null, "left_tutorial"); //spawns a checklist from the class as an object
+const checklist2        = new Checklist(20, 5, null, 250, 350, 730,  600, 5, null, "middle_tutorial");
+const checklist3        = new Checklist(20, 5, null, 125, 150, 755,  430, 5, null, "right_tutorial");
+const checklist_notepad = new Checklist(20, 5, null, 200, 200, 800,  300, 5, null, "checklist");
+const calendar          = new Checklist(20, 5, null, 500, 900, 400, 1000, 5, null, "calendar");
 
-
-
-
-checklist.spawn        (0, 250, 250, 'dyno', true); //spawns left_tutorial
-checklist2.spawn       (0, 730, 600, 'dyno', true); //spawns middle tutorial
-checklist3.spawn       (0, 755, 430, 'dyno', true); //spawns right tutorial
-spawn_checklist_notepad(2, 100, 100, 'dyno', true); //spawns a checklist with 2 items
-
-
-
-
-
-
-function spawn_checklist_notepad(items, x, y, spawn_type, collision_mode) {
-    checklist_notepad.spawn(items, x, y, spawn_type, collision_mode) //spawns a checklist with 2 items
-}
+                    //                      col mode
+                    //               spawn type    
+                    //          top
+                    //     left 
+                    //item count 
+checklist.spawn        (0, 250, 250,  'dyno', true); //spawns left_tutorial
+checklist2.spawn       (0, 730, 600,  'dyno', true); //spawns middle tutorial
+checklist3.spawn       (0, 755, 430,  'dyno', true); //spawns right tutorial
+calendar.spawn         (0, 300, 1000, 'dyno', true); //spawns a calendar node
+checklist_notepad.spawn(2, 100, 100,  'dyno', true); //spawns a checklist with 2 items
 
 
 let nodes_displayed = false;
@@ -473,11 +646,6 @@ function remove_array_item(array, item) { //array is the array //item is the ite
     
     return f;              //returns f
 }
-
-var hello = [1, 2, 3, 4, 5];
-hello = remove_array_item(hello, 2);
-
-
 
 //let selected_items_array = [];
 window.addEventListener('mousedown', (e) => {
@@ -688,7 +856,23 @@ function read_acs_file(default_file_path) {
     reader.readAsText(file);
 }
 
+function isNegative(num) {
+    if (num >= 0) return false; //positive
+    if (num < 0)  return true;  //negative
+}
 
+function isDivisible(num, by) {
+    const a = `${(num / by)}`.split('.');   //splits a into an array on the .
+    if (a.length == 1) {//when array length is 1
+        if (isNaN(a[0])) { //if a is NaN
+            console.log('variable is the wrong type')
+            return false;                   //if something is broken
+        }
+        return true;                        //num is divisible by by
+    } else if (a.length == 2) {//if array length is 2
+        return false;                       //num is not divisible by by
+    }
+}
 
 
 
@@ -711,3 +895,4 @@ function read_acs_file(default_file_path) {
     first launch of .acs
         'a personal color scheme'
 */
+

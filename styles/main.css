@@ -15,10 +15,18 @@
     --Default_green: #84D264;
     --Default_blue: #44C5CD;
     --Default_purple: #AB48C1;
+
+    /* calendar */
+    --calendar-primary: rgb(75, 75, 75);
+    --calendar-secondary: rgb(90, 90, 90);
+    --calendar-borders: rgb(25, 25, 25);
 }
 
 html {
     overflow: scroll;
+    height: 10000px;
+    color: var(--node_text_color);
+    font-family: var(--text_font);
 }
 
 #file_transfer {
@@ -250,4 +258,77 @@ html {
 
 .the_shadow_realm {
     display: none;
+}
+
+.acs_input {
+    margin-top: 5%;
+}
+
+
+
+
+
+
+
+/* \\==|| ____calendar____ \\==// */
+
+.calendar_container {
+    display: grid;
+    grid-template-columns: 5;
+    grid-template-rows: 8fr 1fr;
+    height: 100%;
+    font-size: 1em;
+    z-index: 4;
+}
+
+.calendar_table_node {
+    background-color: var(--calendar_primary);
+    box-shadow: 0 0 0 0.4vw var(--calendar-borders);   
+    overflow: hidden;
+    border-radius: 5px;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 2%;
+    grid-column: span 5;
+    grid-auto-columns: 1fr 1fr 1fr 1fr;
+}
+
+.calendar_day_cell {
+    color: white;
+}
+
+.calendar_day_title_cell {
+    color: white;
+    padding: 1vw;
+    /* width: 150px; */
+}
+
+.calendar_cell { 
+    --cell-size: 100px;
+    --height-multiplier: 0.5;
+    width: var(--cell-size);
+    height: calc(var(--cell-size) * var(--height-multiplier));
+    text-align: center;
+}
+
+.change_month_button {
+    color: #fff;
+    width: 200px;
+    margin: 0 auto 2%;
+    background-color: var(--calendar_primary);
+    border: 0.3vw solid var(--calendar-borders);
+    border-radius: 1000px;
+    z-index: 6;
+}
+
+.change_month_button:hover {
+    background-color: var(--calendar-secondary);
+}
+
+.date_label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 250px; */
+    margin: 0 auto;
 }
