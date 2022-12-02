@@ -24,7 +24,6 @@
 
 html {
     overflow: scroll;
-    height: 10000px;
     color: var(--node_text_color);
     font-family: var(--text_font);
 }
@@ -71,19 +70,6 @@ html {
     border-radius: 10px;
     border: 3px none rgba(0, 0, 0, 0);
   }
-
-.checklist {
-    background-color: var(--node_background_color);
-    border: 0.5vh solid var(--nav_bar_border_color);
-    border-radius: 0.3em;
-    position: absolute;
-    top: 0;
-    resize: both;
-    overflow: hidden;
-    text-align: center;
-    padding: 0.1em;
-    box-sizing: border-box;
-}
 
 .checklist_grab_area {
     width: 100%;
@@ -136,11 +122,9 @@ html {
     max-width: 80%;
     opacity: 0.6;
     user-select: none;
-    -webkit-user-drag: none;
+    pointer-events: none;
     display: inline-block;
-    
 }
-
 
 #side-navbar {
     z-index: 90;
@@ -158,6 +142,10 @@ html {
     flex-direction: column;
 }
 
+#node_list_holder > * {
+    cursor: pointer;
+}
+
 #node_list_holder {
     margin-top: 14vh;
     width: 100%;
@@ -172,32 +160,10 @@ html {
     display: none;
 }
 
-#top-navbar {
-    z-index: 100;
-    background-color: var(--nav_bar_background);
-    position: fixed;
-    top: 0;
-    left: 0; 
-    width: 100%;
-    height: 8%;
-    border: 0.3vh solid var(--nav_bar_border_color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 85%;
-}
-
 .left_nav_img {
     width: 75%;
     z-index: 110;
     opacity: 0.7;
-}
-
-.top_nav_img {
-    opacity: 0.7;
-    aspect-ratio: 1 / 1;
-    height: 75%;
-    max-width: 15%;
 }
 
 .checklist_item_styles {

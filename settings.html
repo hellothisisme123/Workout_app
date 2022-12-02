@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./styles/all.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/apple_watch_responsive.css">
+    <link rel="stylesheet" href="./styles/media_queries.css">
+    <link rel="stylesheet" href="./styles/settings.css">
+    
+    <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
+    <link rel="file" id="acs_file_link" href="./Workout_app_1.21/color_themes/default_theme/Default_theme.acs">
+    <script src="./js/settings.js" type="module" defer></script>
+    <title>Workout App</title>
+</head>
+<body>
+    <div id="top-navbar">
+        <img class="top_nav_img" onclick="window.location = './index.html'" src="./assets/svg/Workout_App_Logo.svg" />                    
+        <img class="top_nav_img" onclick="window.location = './settings.html'" src="./assets/svg/Settings.svg" />
+    </div>
+
+    <div class="container">
+        <div class="settings_wrapper">
+            <div class="title">Settings</div>
+            <section class="tree">
+                <ul>
+                    <li><span class="tree_branch">Common</span></li>
+                    <li><span class="tree_branch">Personalize</span>
+                        <ul>
+                            <li>colors</li>
+                            <li>font</li>
+                        </ul>
+                    </li>
+                    <li><span class="tree_branch">Calendar</span>
+                        <ul>
+                            <li>colors</li>
+                            <li><span class="tree_branch">asdasd</span>
+                                <ul>
+                                    <li>colors</li>
+                                    <li>font</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span class="tree_branch">Reminders</span></li>
+                </ul>
+            </section>
+            <section class="content">
+                <div class="title">Common</div>
+                <div class="setting-wrapper active">
+                    <div class="left_round"></div>
+                    <div class="right_round"></div>
+
+                    <h1 class="title">Setting Name</h1>
+                    <p class="description">This setting is for the spacing between the dots. When the setting is set to 10, there is 10px between each dot on the grid background. </p>
+                    <input data-linked-setting="dot_spacing" type="text" placeholder="example: 10px" />
+                </div>
+            </section>
+        </div>
+    </div>    
+</body>
+</html>

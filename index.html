@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./styles/all.css">
     <link rel="stylesheet" href="./styles/main.css">
-    <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/apple_watch_responsive.css">
     <link rel="stylesheet" href="./styles/media_queries.css">
+
+    <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
     <link rel="file" id="acs_file_link" href="./Workout_app_1.21/color_themes/default_theme/Default_theme.acs">
+    
     <script src="./js/main.js" defer></script>
     <title>Workout App</title>
 </head>
@@ -16,16 +21,16 @@
     <div id="container">
         <div id="file_transfer" class="off"></div>
         <div id="top-navbar">
-            <img class="top_nav_img" src="./assets/svg/Workout_App_Logo.svg" />                    
+            <img class="top_nav_img" onclick="window.location = './index.html'" src="./assets/svg/Workout_App_Logo.svg" />                    
             
-            <img class="top_nav_img" src="./assets/svg/Settings.svg" />
+            <img class="top_nav_img" onclick="window.location = './settings.html'" src="./assets/svg/Settings.svg" />
         </div>
         <br><br><br><br><br><br>
         <input type="file" name="color_theme" id="color_theme_input" >
         <div id="side-navbar">
             <div id="node_list_holder">
                 <img onclick="show_nodes()" class="left_nav_img" src="./assets/svg/Options_Icon.svg" />
-                <img onclick="spawn_checklist_notepad(2, 500, 100, 'dino', true)" class="left_nav_img node_place_button" src="./assets/svg/Checklist_Node.svg" />
+                <img onclick="checklist_notepad.spawn(2, 500, 100, 'dino', true)" class="left_nav_img node_place_button" src="./assets/svg/Checklist_Node.svg" />
             </div>
         </div>
         
