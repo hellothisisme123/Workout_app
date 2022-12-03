@@ -1,0 +1,28 @@
+
+.grid_bg {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    user-select: none;
+    pointer-events: none;
+    background-color: var(--bg_color);
+    display: grid;
+    --cols: 10; /* defaults */
+    --rows: 10; /* defaults */
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+}
+
+.grid_bg > .bg_tile {
+    box-sizing: border-box;
+    width: var(--grid_item_size);
+    height: var(--grid_item_size);
+    background-color: transparent;
+    background: var(--bg_img);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: var(--bg_size);
+    opacity: var(--bg_opacity);
+}
