@@ -8,9 +8,11 @@ const settings_wrapper_height = () => {
     setting_wrapper.style.top = `${topnavrect.bottom}px`
 }
 
-window.onload = () => {
+setTimeout(() => { // runs on load
     settings_wrapper_height()
+
     window.addEventListener('resize', (e) => settings_wrapper_height(e))
+    
     const tree_branches = document.querySelectorAll('.tree_branch')
     tree_branches.forEach(branch => {
         branch.addEventListener('click', (e) => {
@@ -23,5 +25,5 @@ window.onload = () => {
                 }
             });
         })
-    });
-}
+    });    
+}, 0);

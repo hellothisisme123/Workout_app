@@ -19,8 +19,8 @@ const create_grid = () => {
 
     console.log(grid_item_size);
 
-    let bg_grid_cols = Math.floor(document.body.clientWidth / grid_item_size),
-        bg_grid_rows = Math.floor(document.body.clientHeight / grid_item_size)
+    let bg_grid_cols = Math.floor(grid_bg.clientWidth / grid_item_size),
+        bg_grid_rows = Math.floor(grid_bg.clientHeight / grid_item_size)
 
     console.log(bg_grid_cols);
 
