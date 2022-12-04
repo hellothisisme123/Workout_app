@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="./assets/svg/Workout_App_Logo_Smaller.svg" type="image/x-icon">
     <link rel="file" id="acs_file_link" href="./Workout_app_1.21/color_themes/default_theme/Default_theme.acs">
     
-    <script src="./js/settings.js" type="module" defer></script>
-    <script src="./js/grid_bg.js" type="module" defer></script>
+    <script src="./js/settings.js" defer></script>
+    <script src="./js/grid_bg.js" defer></script>
     <title>Workout App</title>
 </head>
 <body>
@@ -55,21 +55,99 @@
             </section>
             <section class="content">
                 <div class="title">Common</div>
-                <div class="setting-wrapper active">
+
+                <div 
+                    class="setting-wrapper active"
+                    data-setting-class="background_settings"
+                    data-linked-setting="grid_item_size"
+                    data-setting-label="px"
+                    data-setting-type="num"
+                    data-min-value="15"
+                >
                     <div class="left_round"></div>
                     <div class="right_round"></div>
 
-                    <h1 class="title">Setting Name</h1>
-                    <p class="description">This setting is for the spacing between the dots. When the setting is set to 10, there is 10px between each dot on the grid background. </p>
-                    <input data-linked-setting="dot_spacing" type="text" placeholder="example: 10px" />
+                    <h1 class="title">Background Grid Spacing</h1>
+                    <p class="description">This setting is for the spacing between the dots/graphic. When the setting is set to 10, there is 10px between each dot on the grid background. Some values too low will create significant lag on the users machine, so there is a minimum value for this of 15. WARNING: Changing this setting too quickly in a short amount of time may create large amounts of lags or stutters on the webpage. The lag should resolve if given time.</p>
+                    <input type="text" placeholder="example: 10px" />
                 </div>
-                <div class="setting-wrapper">
+                
+                <div 
+                    class="setting-wrapper"
+                    data-setting-class="background_settings"
+                    data-linked-setting="bg_img"
+                    data-setting-type="options"
+                >
                     <div class="left_round"></div>
                     <div class="right_round"></div>
 
-                    <h1 class="title">Setting Name</h1>
-                    <p class="description">This setting is for the spacing between the dots. When the setting is set to 10, there is 10px between each dot on the grid background. </p>
-                    <input data-linked-setting="dot_spacing" type="text" placeholder="example: 10px" />
+                    <h1 class="title">Background Image</h1>
+                    <p class="description">This is the specific image that is displayed on the background grid. The default image is the dots that create a grid pattern on the background of each webpage. </p>
+
+                    <div class="options_wrapper">
+                        <div class="option active">
+                            <img src="./assets/svg/bg_grid/dot.svg" alt="">
+                        </div>
+                        <div class="option">
+                            <img src="./assets/svg/bg_grid/dot_hollow.svg" alt="">
+                        </div>
+                        <div class="option">
+                            <img src="./assets/svg/bg_grid/bg_plus_round.svg" alt="">
+                        </div>
+                        <div class="option">
+                            <img src="./assets/svg/bg_grid/bg_plus_hard.svg" alt="">
+                        </div>
+                        <div class="option">
+                            <img src="./assets/svg/bg_grid/x_plus_round.svg" alt="">
+                        </div>
+                        <div class="option">
+                            <img src="./assets/svg/bg_grid/x_plus_hard.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div 
+                    class="setting-wrapper"
+                    data-setting-class="background_settings"
+                    data-linked-setting="bg_opacity"
+                    data-setting-type="num"
+                >
+                    <div class="left_round"></div>
+                    <div class="right_round"></div>
+
+                    <h1 class="title">Background Image Opacity</h1>
+                    <p class="description">This determines the opacity for the background images. 1 is 100% opacity, 0 is 0% opactity.</p>
+                    <input type="text" placeholder="example: 10px" />
+                </div>
+
+                <div 
+                    class="setting-wrapper"
+                    data-setting-class="background_settings"
+                    data-linked-setting="bg_size"
+                    data-setting-label="px"
+                    data-setting-type="num"
+                >
+                    <div class="left_round"></div>
+                    <div class="right_round"></div>
+
+                    <h1 class="title">Background Image Size</h1>
+                    <p class="description">This is for the size of that background images. If you increase this value it makes the images larger. Be warned that if the value is too large there may be clipping. </p>
+                    <input type="text" placeholder="example: 10px" />
+                </div>
+
+                <div 
+                    class="setting-wrapper"
+                    data-setting-class="background_settings"
+                    data-linked-setting="bg_color"
+                    data-setting-type="string"
+                >
+                    <div class="left_round"></div>
+                    <div class="right_round"></div>
+
+                    <h1 class="title">Background Color</h1>
+                    <p class="description">This is the background color of the space between the graphic patters. The value is a hex code, or rgb value. </p>
+                    <!-- <input type="color" class="color_input"> -->
+                    <input type="text" placeholder="example: 10px" />
                 </div>
             </section>
         </div>
