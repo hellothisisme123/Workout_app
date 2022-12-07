@@ -774,7 +774,7 @@ function read_acs_file(default_file_path) {
             if (line[1].charAt(0) == '[') {
                 line[1] = line[1].slice(1); //removes the [ from the beginning of each line
                 line[1] = line[1].slice(0, -2); //removes the ]; from the end of each line
-
+                
                 file_data_storage.push([line[0], line[1] ]); //pushes the lines with rgba
             } else if (line[1].charAt(0) == '(') {
                 line[1] = line[1].slice(0, -1); //removes the ; from the end of each line
@@ -784,12 +784,12 @@ function read_acs_file(default_file_path) {
                 line[1][0] = line[1][0].slice(0, -1); //removes the ) from the hex code
                 line[1][1] = line[1][1].slice(1); //removes the ( from the opacity
                 line[1][1] = line[1][1].slice(0, -9); //removes the ) from the opacity
-
+                
                 file_data_storage.push([ line[0], line[1][0], line[1][1] ]); //pushes the lines with hex
             } else if (line[1].charAt(0) == '{') {
                 line[1] = line[1].slice(1); //removes the { from the beginning
                 line[1] = line[1].slice(0, -2); //removes the }; frome the end
-
+                
                 file_data_storage.push([line[0], line[1]]); //pushes the lines with custom
             }
             file = file_data_storage; //saves to file

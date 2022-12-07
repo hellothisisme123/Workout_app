@@ -128,11 +128,13 @@ section.content {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 4rem;
+    height: 5rem;
     /* border: 3px solid var(--nav_bar_border_color); */
     border-radius: 0.5rem;
     box-sizing: border-box;
     background-color: var(--bg_color);
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .options_wrapper > .option:first-child {

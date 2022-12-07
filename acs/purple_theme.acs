@@ -1,0 +1,23 @@
+: example:(#123456) (1.00_opacity) ;
+: example:(#abc) (0.00_opacity)    ;
+: example:[rgba(1,2,3,0.5)]        ;
+: example:{anything}               ;
+: to add bg dot color              ;
+
+nav_bar_background:(#744FC6) (1.00_opacity);
+nav_bar_border_color:[rgba(45,30,78,0.5)];
+checklist_box_border_color:(#2d1e4e) (1.00_opacity);
+node_background_color:(#744FC6) (0.75_opacity);
+node_background_highlight_color:(#744FC6) (1.00_opacity);
+node_border_highlight_color:(#170f29) (1.00_opacity);
+node_text_color:(#fff) (1.00_opacity);
+file_transfer_color:[rgba(50,50,50,0.50)];
+text_font:{Calibri};
+
+calendar-primary:{#744FC6};
+calendar-secondary:{#744FC6};
+calendar-borders:{#2d1e4e};
+
+bg_color:{#2d1e4e};
+
+
